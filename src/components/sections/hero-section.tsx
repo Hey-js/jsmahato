@@ -149,30 +149,6 @@ export function HeroSection() {
             </Link>
           </div>
 
-          <div className="mt-10 rounded-xl border border-border/60 bg-muted/20 p-5 sm:p-6 backdrop-blur-sm max-w-2xl animate-fade-in" style={{ animationDelay: "300ms" }}>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-signal"></span> Recruiter Summary
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4 text-sm text-foreground/90">
-              <div>
-                <strong className="block text-foreground font-medium mb-1">Current Focus:</strong>
-                <ul className="space-y-1 text-muted-foreground">
-                  <li>Backend Engineering</li>
-                  <li>Cloud Computing</li>
-                  <li>System Design</li>
-                </ul>
-              </div>
-              <div>
-                <strong className="block text-foreground font-medium mb-1">Open To:</strong>
-                <ul className="space-y-1 text-muted-foreground">
-                  <li>Software Engineering Roles</li>
-                  <li>Backend Engineering Roles</li>
-                  <li>Cloud Engineering Opportunities</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
           <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <a
               href={githubUrl}
