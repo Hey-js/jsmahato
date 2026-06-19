@@ -1,4 +1,4 @@
-import { sanityClient } from "@/lib/sanity";
+import { fetchSanity } from "@/lib/sanity.server";
 import { useQuery } from "@tanstack/react-query";
 import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
@@ -8,7 +8,7 @@ export function TestimonialsSection() {
   const { data: testimonials = [], isLoading } = useQuery({
     queryKey: ["testimonials"],
     queryFn: async () => {
-      const { data } = { data: await sanityClient.fetch(`*[_type == "testimonial"]`) };
+      const { data } = { data: await fetchSanity({ data: { query: `*[_type == "testimonial"]` } }) };
       return data;
     },
   });

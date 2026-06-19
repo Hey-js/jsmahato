@@ -8,17 +8,5 @@ export default defineConfig({
   tanstackStart: {},
   nitro: {
     preset: "vercel"
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-router': ['@tanstack/react-router'],
-          'vendor-query': ['@tanstack/react-query'],
-          'vendor-sanity': ['@sanity/client', '@sanity/image-url', 'groq'],
-        }
-      }
-    }
   }
 });

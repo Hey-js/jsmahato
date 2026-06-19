@@ -1,14 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { site } from "@/lib/site";
 import { HeroSection } from "@/components/sections/hero-section";
-import { AboutSection } from "@/components/sections/about-section";
-import { SkillsSection } from "@/components/sections/skills-section";
-import { ExperienceSection } from "@/components/sections/experience-section";
-import { ProjectsSection } from "@/components/sections/projects-section";
-import { PhotographySection } from "@/components/sections/photography-section";
-import { OpportunitiesSection } from "@/components/sections/opportunities-section";
-import { LearningSection } from "@/components/sections/learning-section";
 import { getCanonicalLink, getBreadcrumbJsonLd } from "@/lib/seo";
+import { lazy, Suspense } from "react";
+
+// Lazy load below-the-fold sections to massively reduce the initial bundle size
+const AboutSection = lazy(() => import("@/components/sections/about-section").then((m) => ({ default: m.AboutSection })));
+const SkillsSection = lazy(() => import("@/components/sections/skills-section").then((m) => ({ default: m.SkillsSection })));
+const ExperienceSection = lazy(() => import("@/components/sections/experience-section").then((m) => ({ default: m.ExperienceSection })));
+const ProjectsSection = lazy(() => import("@/components/sections/projects-section").then((m) => ({ default: m.ProjectsSection })));
+const PhotographySection = lazy(() => import("@/components/sections/photography-section").then((m) => ({ default: m.PhotographySection })));
+const OpportunitiesSection = lazy(() => import("@/components/sections/opportunities-section").then((m) => ({ default: m.OpportunitiesSection })));
+const LearningSection = lazy(() => import("@/components/sections/learning-section").then((m) => ({ default: m.LearningSection })));
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,13 +37,15 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <OpportunitiesSection />
-      <LearningSection />
-      <PhotographySection />
+      <Suspense fallback={<div className="h-20" />}>
+        <AboutSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <OpportunitiesSection />
+        <LearningSection />
+        <PhotographySection />
+      </Suspense>
     </>
   );
 }

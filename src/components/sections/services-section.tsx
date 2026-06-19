@@ -1,4 +1,4 @@
-import { sanityClient } from "@/lib/sanity";
+import { fetchSanity } from "@/lib/sanity.server";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ export function ServicesSection() {
     queryKey: ["services"],
     queryFn: async () => {
       const { data } = {
-        data: await sanityClient.fetch(`*[_type == "service"] | order(order asc)`),
+        data: await fetchSanity({ data: { query: `*[_type == "service"] | order(order asc)` } }),
       };
       return data;
     },

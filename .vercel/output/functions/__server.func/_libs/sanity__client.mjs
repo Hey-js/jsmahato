@@ -1,6 +1,32 @@
 import { k, z, C, T, _, N, y as y$1, g, p as p$1 } from "./get-it.mjs";
+import { O } from "./get-it.mjs";
 import { c as cjsExports, o as operatorsExports } from "./rxjs.mjs";
 import { c as customAlphabet } from "./nanoid.mjs";
+import "./decompress-response.mjs";
+import "zlib";
+import "./react.mjs";
+import "stream";
+import "./mimic-response.mjs";
+import "url";
+import "http";
+import "https";
+import "assert";
+import "querystring";
+import "./tunnel-agent.mjs";
+import "net";
+import "tls";
+import "events";
+import "util";
+import "./safe-buffer.mjs";
+import "buffer";
+import "tty";
+import "./through2.mjs";
+import "./readable-stream.mjs";
+import "node:string_decoder";
+import "./inherits.mjs";
+import "./util-deprecate.mjs";
+import "./is-retry-allowed.mjs";
+import "crypto";
 function isRecord$1(value) {
   return typeof value == "object" && value !== null && !Array.isArray(value);
 }
@@ -3441,5 +3467,26 @@ const stegaEncodeSourceMap$2 = /* @__PURE__ */ Object.freeze({
   stegaEncodeSourceMap$1
 });
 export {
-  createClient as c
+  BasePatch,
+  BaseTransaction,
+  ChannelError,
+  ClientError,
+  ConnectionFailedError,
+  CorsOriginError,
+  DisconnectError,
+  MessageError,
+  MessageParseError,
+  ObservablePatch,
+  ObservableSanityClient,
+  ObservableTransaction,
+  Patch,
+  SanityClient,
+  ServerError,
+  Transaction,
+  connectEventSource,
+  createClient,
+  formatQueryParseError,
+  isQueryParseError,
+  O as unstable__adapter,
+  validateApiPerspective
 };

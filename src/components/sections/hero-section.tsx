@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
 import portraitFallback from "@/assets/portrait.jpg";
 import { useQuery } from "@tanstack/react-query";
-import { sanityClient, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
+import { fetchSanity } from "@/lib/sanity.server";
 
 export function HeroSection() {
   const {
@@ -15,7 +16,7 @@ export function HeroSection() {
     queryKey: ["siteSettings"],
     queryFn: async () => {
       try {
-        const result = await sanityClient.fetch(`*[_type == "siteSettings"][0]{
+        const result = await fetchSanity({ data: { query: `*[_type == "siteSettings"][0]{
           heroTitle,
           heroSubtitle,
           description,
@@ -25,7 +26,7 @@ export function HeroSection() {
           linkedinUrl,
           githubUrl,
           email
-        }`);
+        }` } });
         console.log("Sanity Hero Query Result:", result);
         return result;
       } catch (err) {

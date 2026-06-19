@@ -1,14 +1,17 @@
-import { createClient } from "@sanity/client";
-import { createImageUrlBuilder } from "@sanity/image-url";
 
-export const sanityClient = createClient({
+import { createImageUrlBuilder } from "@sanity/image-url";
+import { fetchSanity } from "./sanity.server";
+
+const builder = createImageUrlBuilder({
   projectId: "91nt6co0",
   dataset: "production",
-  apiVersion: "2024-01-01",
-  useCdn: false,
 });
 
-const builder = createImageUrlBuilder(sanityClient);
+export const sanityClient = {
+  fetch: async (query: string, params?: any) => {
+    return await fetchSanity({ data: { query, params } });
+  }
+};
 
 export function urlFor(source: any) {
   return builder.image(source);
