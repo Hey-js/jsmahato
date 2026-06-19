@@ -6,28 +6,29 @@ import { getCanonicalLink, getBreadcrumbJsonLd, getFaqJsonLd } from "@/lib/seo";
 import portraitFallback from "@/assets/portrait.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { sanityClient, urlFor } from "@/lib/sanity";
-import { Camera, MapPin, GraduationCap, Briefcase, Zap } from "lucide-react";
+import { Camera, MapPin, GraduationCap, Briefcase, Zap, Plus, Minus } from "lucide-react";
+import { useState } from "react";
 
 const faqs = [
   {
     question: "Who is Jitu Sagar Mahato?",
-    answer: "Jitu Sagar Mahato (JS Mahato) is a Software Engineer based in Ranchi, Jharkhand. He specializes in building modern web applications, backend systems, and exploring cloud technologies."
+    answer: "I'm Jitu Sagar Mahato (JS Mahato), a software engineer based in Ranchi, Jharkhand. My journey started with a Diploma in Computer Science Engineering and later a B.Sc. in Information Technology. Rather than only learning through courses, I've spent most of my time building real-world projects, experimenting with deployment, solving technical problems, and continuously improving my engineering skills.\n\nBeyond software, photography is one of my biggest creative passions. I enjoy documenting stories, culture, people, and moments through my camera. Photography has taught me patience, observation, creativity, and attention to detail—the same qualities that influence how I approach software development.\n\nToday, I'm focused on growing as a Backend and Cloud Engineer while continuing to build meaningful products and pursue visual storytelling through photography."
   },
   {
     question: "What technologies does JS Mahato work with?",
-    answer: "JS Mahato works primarily with JavaScript, TypeScript, React, Node.js, Express, MongoDB, PostgreSQL, and is currently learning AWS and Cloud infrastructure."
+    answer: "My core stack revolves around JavaScript and TypeScript. I have extensive experience building scalable user interfaces with React and Next.js, and crafting robust backend services using Node.js and Express. For data storage and management, I primarily rely on MongoDB and PostgreSQL. More recently, I've been expanding my expertise into Cloud infrastructure, specifically AWS, to deploy, manage, and scale applications more efficiently."
   },
   {
     question: "What projects has JS Mahato built?",
-    answer: "He has built several full-stack applications including an Event Management System, a Photography Portfolio platform, and XR System (a scalable personal portfolio and blogging platform)."
+    answer: "I enjoy building full-stack applications that solve real-world problems and provide seamless user experiences. Some of my notable projects include an Event Management System that handles authentication, ticketing, and user management; a Photography Portfolio designed for high-quality, performant media delivery; and XR System, a scalable personal blogging and portfolio platform built to handle dynamic content publishing."
   },
   {
     question: "Is JS Mahato available for software engineering opportunities?",
-    answer: "Yes, JS Mahato is actively seeking full-time Software Engineering, Backend Engineering, and Cloud Engineering roles."
+    answer: "Yes, I am actively seeking full-time opportunities. While I have hands-on experience across the entire full stack, I am particularly interested in Backend Engineering and Cloud Engineering roles where I can design robust systems, optimize databases, and work with modern deployment pipelines and cloud infrastructure."
   },
   {
     question: "What is JS Mahato currently learning?",
-    answer: "He is currently focused on Cloud Computing (AWS), System Design, Backend Architecture, and Data Structures & Algorithms."
+    answer: "I believe in continuous engineering growth. Right now, my main focus is diving deeper into Cloud Computing (AWS) and System Design. I'm learning how to architect highly available systems, configure reliable CI/CD pipelines, and manage cloud infrastructure. Alongside this, I'm regularly practicing Data Structures and Algorithms to continuously sharpen my problem-solving and analytical skills."
   }
 ];
 
@@ -83,6 +84,45 @@ const renderBlockText = (blocks: any[]) => {
     );
   });
 };
+
+function FaqAccordion({ faqs }: { faqs: { question: string; answer: string }[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <div className="mt-6 divide-y divide-border/60 border-t border-b border-border/60">
+      {faqs.map((faq, i) => {
+        const isOpen = openIndex === i;
+        return (
+          <div key={i} className="py-5">
+            <button
+              onClick={() => setOpenIndex(isOpen ? null : i)}
+              className="flex w-full items-center justify-between text-left focus:outline-none group"
+              aria-expanded={isOpen}
+            >
+              <h3 className="text-[15px] sm:text-base font-medium text-foreground transition-colors group-hover:text-signal pr-4 leading-snug">
+                {faq.question}
+              </h3>
+              <div className="flex-shrink-0 flex items-center justify-center size-7 rounded-full border border-border/60 bg-secondary/30 text-muted-foreground group-hover:bg-secondary group-hover:text-foreground transition-colors">
+                {isOpen ? <Minus className="size-3.5" /> : <Plus className="size-3.5" />}
+              </div>
+            </button>
+            <div 
+              className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"}`}
+            >
+              <div className="overflow-hidden">
+                <div className="text-muted-foreground/90 text-[14.5px] sm:text-sm leading-relaxed space-y-4 pb-2 max-w-[70ch]">
+                  {faq.answer.split('\n\n').map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 function AboutPage() {
   const {
@@ -302,14 +342,7 @@ function AboutPage() {
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Frequently Asked Questions
             </h2>
-            <div className="mt-6 space-y-6">
-              {faqs.map((faq, i) => (
-                <div key={i} className="space-y-2">
-                  <h3 className="text-foreground font-medium">{faq.question}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion faqs={faqs} />
           </Reveal>
         </section>
 
@@ -371,3 +404,4 @@ function AboutPage() {
     </PageShell>
   );
 }
+
