@@ -110,7 +110,7 @@ function FaqAccordion({ faqs }: { faqs: { question: string; answer: string }[] }
               className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"}`}
             >
               <div className="overflow-hidden">
-                <div className="text-muted-foreground/90 text-[14.5px] sm:text-sm leading-relaxed space-y-4 pb-2 max-w-[70ch]">
+                <div className="text-muted-foreground/90 text-[14.5px] sm:text-sm leading-relaxed space-y-4 pb-2 max-w-[70ch] text-justify hyphens-auto">
                   {faq.answer.split('\n\n').map((paragraph, idx) => (
                     <p key={idx}>{paragraph}</p>
                   ))}
