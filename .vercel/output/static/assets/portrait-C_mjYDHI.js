@@ -1,1 +1,0 @@
-import{c as t}from"./index-C8EfDTfw.js";const e=[["path",{d:"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",key:"jecpp"}],["rect",{width:"20",height:"14",x:"2",y:"6",rx:"2",key:"i6l2r4"}]],c=t("briefcase",e),r="/assets/portrait-D954t7gP.jpg";export{c as B,r as p};
