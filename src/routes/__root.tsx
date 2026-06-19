@@ -139,6 +139,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="uaeOkTqfXuuIl8-WntVliTWFZGtmjo-0HXTFUhXZbnU" />
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
