@@ -10,23 +10,25 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+  lastmod?: string;
 }
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
+        const today = new Date().toISOString();
         const entries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/about", changefreq: "monthly", priority: "0.8" },
-          { path: "/skills", changefreq: "monthly", priority: "0.7" },
-          { path: "/experience", changefreq: "monthly", priority: "0.7" },
-          { path: "/projects", changefreq: "monthly", priority: "0.9" },
-          { path: "/photography", changefreq: "monthly", priority: "0.7" },
-          { path: "/services", changefreq: "monthly", priority: "0.8" },
-          { path: "/resume", changefreq: "monthly", priority: "0.7" },
-          { path: "/blog", changefreq: "weekly", priority: "0.8" },
-          { path: "/contact", changefreq: "yearly", priority: "0.6" },
+          { path: "/", changefreq: "weekly", priority: "1.0", lastmod: today },
+          { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: today },
+          { path: "/skills", changefreq: "monthly", priority: "0.7", lastmod: today },
+          { path: "/experience", changefreq: "monthly", priority: "0.7", lastmod: today },
+          { path: "/projects", changefreq: "monthly", priority: "0.9", lastmod: today },
+          { path: "/photography", changefreq: "monthly", priority: "0.7", lastmod: today },
+          { path: "/services", changefreq: "monthly", priority: "0.8", lastmod: today },
+          { path: "/resume", changefreq: "monthly", priority: "0.7", lastmod: today },
+          { path: "/blog", changefreq: "weekly", priority: "0.8", lastmod: today },
+          { path: "/contact", changefreq: "yearly", priority: "0.6", lastmod: today },
         ];
 
         try {
@@ -38,12 +40,12 @@ export const Route = createFileRoute("/sitemap.xml")({
 
           projects.forEach((p: any) => {
             if (p.slug)
-              entries.push({ path: `/projects/${p.slug}`, changefreq: "monthly", priority: "0.8" });
+              entries.push({ path: `/projects/${p.slug}`, changefreq: "monthly", priority: "0.8", lastmod: today });
           });
 
           posts.forEach((p: any) => {
             if (p.slug)
-              entries.push({ path: `/blog/${p.slug}`, changefreq: "monthly", priority: "0.7" });
+              entries.push({ path: `/blog/${p.slug}`, changefreq: "monthly", priority: "0.7", lastmod: today });
           });
         } catch (error) {
           console.error("Failed to fetch dynamic sitemap entries from Sanity", error);
@@ -53,6 +55,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,

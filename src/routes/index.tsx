@@ -13,10 +13,10 @@ import { getCanonicalLink, getBreadcrumbJsonLd } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${site.name} | Software Engineer & Full Stack Developer` },
-      { name: "description", content: site.description },
-      { property: "og:title", content: `${site.name} | Software Engineer & Full Stack Developer` },
-      { property: "og:description", content: site.description },
+      { title: "Jitu Sagar Mahato (JS Mahato) | Software Engineer" },
+      { name: "description", content: "Software engineer based in Ranchi, India. Building modern web applications, backend systems, and cloud-focused software solutions." },
+      { property: "og:title", content: "Jitu Sagar Mahato (JS Mahato) | Software Engineer" },
+      { property: "og:description", content: "Software engineer based in Ranchi, India. Building modern web applications, backend systems, and cloud-focused software solutions." },
       { property: "og:url", content: "/" },
     ],
     links: [getCanonicalLink("/")],

@@ -2,11 +2,34 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site";
-import { getCanonicalLink, getBreadcrumbJsonLd } from "@/lib/seo";
+import { getCanonicalLink, getBreadcrumbJsonLd, getFaqJsonLd } from "@/lib/seo";
 import portraitFallback from "@/assets/portrait.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { sanityClient, urlFor } from "@/lib/sanity";
 import { Camera, MapPin, GraduationCap, Briefcase, Zap } from "lucide-react";
+
+const faqs = [
+  {
+    question: "Who is Jitu Sagar Mahato?",
+    answer: "Jitu Sagar Mahato (JS Mahato) is a Software Engineer based in Ranchi, Jharkhand. He specializes in building modern web applications, backend systems, and exploring cloud technologies."
+  },
+  {
+    question: "What technologies does JS Mahato work with?",
+    answer: "JS Mahato works primarily with JavaScript, TypeScript, React, Node.js, Express, MongoDB, PostgreSQL, and is currently learning AWS and Cloud infrastructure."
+  },
+  {
+    question: "What projects has JS Mahato built?",
+    answer: "He has built several full-stack applications including an Event Management System, a Photography Portfolio platform, and XR System (a scalable personal portfolio and blogging platform)."
+  },
+  {
+    question: "Is JS Mahato available for software engineering opportunities?",
+    answer: "Yes, JS Mahato is actively seeking full-time Software Engineering, Backend Engineering, and Cloud Engineering roles."
+  },
+  {
+    question: "What is JS Mahato currently learning?",
+    answer: "He is currently focused on Cloud Computing (AWS), System Design, Backend Architecture, and Data Structures & Algorithms."
+  }
+];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,12 +37,12 @@ export const Route = createFileRoute("/about")({
       { title: `About | ${site.name}` },
       {
         name: "description",
-        content: `About ${site.name}, Software Engineer and Full Stack Developer based in Ranchi, Jharkhand, India.`,
+        content: `Learn more about Jitu Sagar Mahato, a Software Engineer and Backend Developer based in Ranchi, Jharkhand, India.`,
       },
       { property: "og:title", content: `About | ${site.name}` },
       {
         property: "og:description",
-        content: `Background and software engineering journey of ${site.name}.`,
+        content: `Background and software engineering journey of Jitu Sagar Mahato.`,
       },
       { property: "og:url", content: `${site.url}/about` },
       { property: "og:image", content: `${site.url}/og-image.png` },
@@ -35,6 +58,10 @@ export const Route = createFileRoute("/about")({
           ]),
         ),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(getFaqJsonLd(faqs)),
+      }
     ],
   }),
   component: AboutPage,
@@ -267,6 +294,20 @@ function AboutPage() {
                 >
                   {item}
                 </span>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-6 space-y-6">
+              {faqs.map((faq, i) => (
+                <div key={i} className="space-y-2">
+                  <h3 className="text-foreground font-medium">{faq.question}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{faq.answer}</p>
+                </div>
               ))}
             </div>
           </Reveal>

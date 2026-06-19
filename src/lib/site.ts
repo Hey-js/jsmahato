@@ -2,14 +2,14 @@ export const site = {
   name: "Jitu Sagar Mahato",
   shortName: "JS Mahato",
   role: "Software Engineer",
-  roles: ["Software Engineer", "Full Stack Developer", "Problem Solver", "Builder"],
+  roles: ["Software Engineer", "Backend Developer", "Cloud Engineer", "System Architecture"],
   company: "Independent",
   location: "Ranchi, Jharkhand, India",
   email: "jsmahato.official@gmail.com",
   phone: "+91 00000 00000",
   description:
-    "Software Engineer building modern web applications, backend systems, and content-driven platforms.",
-  url: import.meta.env?.VITE_SITE_URL || "https://jsmahato.vercel.app",
+    "Software Engineer based in Ranchi, India. Building modern web applications, backend systems, and cloud-focused software solutions.",
+  url: "https://jsmahato.vercel.app",
   social: {
     github: "https://github.com/Hey-js",
     linkedin: "https://www.linkedin.com/in/jsmahato",

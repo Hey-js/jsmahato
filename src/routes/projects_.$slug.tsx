@@ -57,8 +57,11 @@ export const Route = createFileRoute("/projects_/$slug")({
             author: {
               "@type": "Person",
               name: site.name,
+              url: site.url
             },
             applicationCategory: "WebApplication",
+            operatingSystem: "Any",
+            keywords: project.technologies ? project.technologies.join(", ") : undefined,
           }),
         },
         {
