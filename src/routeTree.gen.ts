@@ -15,6 +15,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PhotographyRouteImport } from './routes/photography'
+import { Route as Googlefa88608dab7316f3DothtmlRouteImport } from './routes/googlefa88608dab7316f3[.]html'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -54,6 +55,12 @@ const PhotographyRoute = PhotographyRouteImport.update({
   path: '/photography',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Googlefa88608dab7316f3DothtmlRoute =
+  Googlefa88608dab7316f3DothtmlRouteImport.update({
+    id: '/googlefa88608dab7316f3.html',
+    path: '/googlefa88608dab7316f3.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ExperienceRoute = ExperienceRouteImport.update({
   id: '/experience',
   path: '/experience',
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/googlefa88608dab7316f3.html': typeof Googlefa88608dab7316f3DothtmlRoute
   '/photography': typeof PhotographyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resume': typeof ResumeRoute
@@ -116,6 +124,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/googlefa88608dab7316f3.html': typeof Googlefa88608dab7316f3DothtmlRoute
   '/photography': typeof PhotographyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resume': typeof ResumeRoute
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/googlefa88608dab7316f3.html': typeof Googlefa88608dab7316f3DothtmlRoute
   '/photography': typeof PhotographyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/resume': typeof ResumeRoute
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
+    | '/googlefa88608dab7316f3.html'
     | '/photography'
     | '/privacy-policy'
     | '/resume'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
+    | '/googlefa88608dab7316f3.html'
     | '/photography'
     | '/privacy-policy'
     | '/resume'
@@ -183,6 +195,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/experience'
+    | '/googlefa88608dab7316f3.html'
     | '/photography'
     | '/privacy-policy'
     | '/resume'
@@ -200,6 +213,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
+  Googlefa88608dab7316f3DothtmlRoute: typeof Googlefa88608dab7316f3DothtmlRoute
   PhotographyRoute: typeof PhotographyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ResumeRoute: typeof ResumeRoute
@@ -254,6 +268,13 @@ declare module '@tanstack/react-router' {
       path: '/photography'
       fullPath: '/photography'
       preLoaderRoute: typeof PhotographyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/googlefa88608dab7316f3.html': {
+      id: '/googlefa88608dab7316f3.html'
+      path: '/googlefa88608dab7316f3.html'
+      fullPath: '/googlefa88608dab7316f3.html'
+      preLoaderRoute: typeof Googlefa88608dab7316f3DothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/experience': {
@@ -320,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
+  Googlefa88608dab7316f3DothtmlRoute: Googlefa88608dab7316f3DothtmlRoute,
   PhotographyRoute: PhotographyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ResumeRoute: ResumeRoute,
