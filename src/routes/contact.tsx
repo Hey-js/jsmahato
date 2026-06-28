@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { site } from "@/lib/site";
 import { getCanonicalLink, getBreadcrumbJsonLd } from "@/lib/seo";
+import { sendContactEmail } from "@/lib/mail.server";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -52,55 +53,23 @@ function ContactPage() {
     const payload = {
       name: String(fd.get("name") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
-      subject: String(fd.get("subject") ?? "").trim() || null,
+      subject: String(fd.get("subject") ?? "").trim() || "New Portfolio Contact Form Submission",
       message: String(fd.get("message") ?? "").trim(),
     };
-    const submitData = {
-      access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
-      name: payload.name,
-      email: payload.email,
-      subject: payload.subject || "New Portfolio Contact Form Submission",
-      message: payload.message,
-    };
 
-    console.log("--- Web3Forms Debug ---");
-    console.log(
-      "Environment variable VITE_WEB3FORMS_ACCESS_KEY:",
-      import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
-    );
-    console.log("Exact payload being sent:", submitData);
+    console.log("--- Resend Mail Submission Debug ---");
+    console.log("Payload being sent to server function:", payload);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(submitData),
-      });
-
-      const responseText = await response.text();
-      let result;
-      try {
-        result = JSON.parse(responseText);
-        console.log("Web3Forms Raw JSON Response:", result);
-      } catch (parseError) {
-        console.error("Web3Forms Raw Text Response (Not JSON):", responseText);
-        throw new Error("Web3Forms returned a non-JSON response. See console for details.");
-      }
-
-      if (!response.ok || !result.success) {
-        console.error("Web3Forms Error Captured:", result.message || "Unknown Error");
-        throw new Error(result.message || "Submission failed");
-      }
+      const result = await sendContactEmail({ data: payload });
+      console.log("Resend Server Function Result:", result);
 
       toast.success("Message sent successfully.");
       form.reset();
-    } catch (err) {
+    } catch (err: any) {
       console.error("Form Submission Exception:", err);
       toast.error(
-        "Unable to send message. Please email me directly at jsmahato.official@gmail.com",
+        err?.message || "Unable to send message. Please email me directly at jsmahato.official@gmail.com",
       );
     } finally {
       setBusy(false);
